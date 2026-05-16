@@ -4,22 +4,30 @@
   <h1>Car List</h1>
 
   <table>
-    <tr>
-      <th>ID</th>
-      <th>Model</th>
-      <th>Manufacturer</th>
-    </tr>
-
-    {% for car in car_list %}
+    <thead>
       <tr>
-        <td>
-          <a href="{% url 'taxi:car-detail' pk=car.id %}">
-            {{ car.id }}
-          </a>
-        </td>
-        <td>{{ car.model }}</td>
-        <td>{{ car.manufacturer }}</td>
+        <th>ID</th>
+        <th>Model</th>
+        <th>Manufacturer</th>
       </tr>
-    {% endfor %}
+    </thead>
+
+    <tbody>
+      {% for car in car_list %}
+        <tr>
+          <td>
+            <a href="{% url 'taxi:car-detail' pk=car.id %}">
+              {{ car.id }}
+            </a>
+          </td>
+          <td>{{ car.model }}</td>
+          <td>{{ car.manufacturer.name }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3">No cars found</td>
+        </tr>
+      {% endfor %}
+    </tbody>
   </table>
 {% endblock %}
